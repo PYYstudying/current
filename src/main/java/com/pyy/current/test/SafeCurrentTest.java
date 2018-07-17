@@ -1,6 +1,7 @@
 package com.pyy.current.test;
 
 import com.pyy.current.annontation.ThreadNotSafe;
+import com.pyy.current.annontation.ThreadSafe;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.CountDownLatch;
@@ -10,17 +11,19 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
-@ThreadNotSafe
-public class CurrentTest {
+@ThreadSafe
+public class SafeCurrentTest {
 
     private static int threadTotal = 5000;
     private static int requestTotal = 200;
-    private static int count = 0;
+    private static AtomicInteger count = new AtomicInteger(0);
+    //private static int count = 0;
 
 
-    private static void add(){
-        count++;
+    private  static void add(){
+        count.incrementAndGet();
     }
+    //private synchronized static void add(){count++;}
 
     public static void main(String[] args) throws InterruptedException {
          final Semaphore semaphore = new Semaphore(requestTotal);
