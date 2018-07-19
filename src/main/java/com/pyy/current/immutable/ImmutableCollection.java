@@ -20,7 +20,6 @@ public class ImmutableCollection {
 
     public static void main(String[] args) {
 
-        ThreadLocal
         map.put(5,6);
     }
 
